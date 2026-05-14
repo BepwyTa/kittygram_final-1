@@ -1,5 +1,30 @@
 # Kittygram: план работ и статус
 
+## Репозиторий Git (локально уже подготовлено)
+
+- Ветка **`main`**, все изменения **закоммичены** (2 коммита).
+- Старый `origin` переименован в **`upstream`** (шаблон Практикума) — в него пушить не нужно.
+- **Пуш на твой GitHub** с моей стороны невозможен: нужна **твоя** авторизация (браузер, PAT или Git Credential Manager).
+
+### Как запушить у себя (2 минуты)
+
+1. На https://github.com/new создай репозиторий **`kittygram_final`** (публичный или как требует курс), **без** автогенерации README (или потом согласись на merge при push).
+2. В PowerShell из папки проекта выполни (подставь свой логин):
+
+```powershell
+cd c:\Dev\newneww\kittygram_final
+.\scripts\push-to-my-github.ps1 -GitHubUser ТВОЙ_ЛОГИН_GITHUB
+```
+
+Либо вручную:
+
+```powershell
+git remote add origin https://github.com/ТВОЙ_ЛОГИН/kittygram_final.git
+git push -u origin main
+```
+
+После первого успешного `git push` на GitHub в **Actions** должен запуститься workflow (push в `main`).
+
 ## Уже сделано в репозитории (код и конфиги)
 
 - **Backend:** `backend/Dockerfile`, Gunicorn, `requirements.txt` (в т.ч. gunicorn, psycopg2-binary, Pillow), `.dockerignore`.
