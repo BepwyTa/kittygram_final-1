@@ -18,7 +18,7 @@ services:
       retries: 10
 
   backend:
-    build: ./backend/
+    image: ${DOCKERHUB_USERNAME}/kittygram_backend:latest
     container_name: backend
     env_file: .env
     volumes:
@@ -29,9 +29,9 @@ services:
         condition: service_healthy
 
   frontend:
-    env_file: .env
-    build: ./frontend/
+    image: ${DOCKERHUB_USERNAME}/kittygram_frontend:latest
     container_name: frontend
+    env_file: .env
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
@@ -39,7 +39,7 @@ services:
       - backend
 
   gateway:
-    build: ./nginx/
+    image: ${DOCKERHUB_USERNAME}/kittygram_gateway:latest
     container_name: gateway
     env_file: .env
     ports:
