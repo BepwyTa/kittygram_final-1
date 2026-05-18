@@ -48,6 +48,20 @@ git push -u origin main
 6. **`tests.yml`:** подставить свой `repo_owner`, реальные `https://...` для Kittygram и Taski, `dockerhub_username`.
 7. После правок **`main.yml`** снова скопировать его в **`kittygram_workflow.yml`** (или держать их одинаковыми).
 
+## Подготовлено локально для SSH-деплоя
+
+- Создан новый SSH-ключ без passphrase:
+  - приватный ключ: `C:\Users\PC\.ssh\kittygram_github_actions`
+  - публичный ключ: `C:\Users\PC\.ssh\kittygram_github_actions.pub`
+- Публичный ключ нужно добавить на сервер в `/root/.ssh/authorized_keys` или через панель хостинга.
+- Приватный ключ нужно добавить в GitHub Secrets как `SSH_KEY`.
+- Для root-доступа секреты должны быть:
+  - `HOST=167.148.159.47`
+  - `USER=root`
+  - `SSH_KEY=<содержимое C:\Users\PC\.ssh\kittygram_github_actions>`
+- `SSH_PASSPHRASE` для нового ключа не нужен.
+- Серверный helper-скрипт: `deploy/server-setup-kittygram.sh`.
+
 ## Артефакт для загрузки на платформу
 
 - Архив **`kittygram_final_submit.zip`** в каталоге `c:\Dev\newneww\` (пересобирается после изменений).
