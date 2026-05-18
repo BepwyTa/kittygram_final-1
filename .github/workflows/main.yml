@@ -94,7 +94,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: docker-compose.production.yml
-          target: /home/${{ secrets.USER }}/kittygram/
+          target: ~/kittygram/
       - name: SSH deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
