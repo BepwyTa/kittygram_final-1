@@ -1,26 +1,36 @@
-#  Как работать с репозиторием финального задания
+# Kittygram
 
-## Что нужно сделать
+Сайт для публикации фотографий котиков. Можно регистрироваться, добавлять своих котов с фоткой, именем, цветом и годом рождения, смотреть чужих.
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+## Стек
 
-## Как проверить работу с помощью автотестов
+Python 3.9 / Django / DRF / Gunicorn / PostgreSQL / React / Docker / Nginx / GitHub Actions
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
+## Локальный запуск
+
+Скопируй `.env.example` → `.env`, заполни переменные, затем:
+
+```bash
+docker compose up -d
+docker compose exec backend python manage.py migrate
+docker compose exec backend python manage.py collectstatic --noinput
 ```
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+Откроется на `http://localhost:9000`.
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+## Деплой
 
-## Чек-лист для проверки перед отправкой задания
+При пуше в `main` GitHub Actions прогоняет тесты (flake8, pytest, Django tests, npm test), собирает образы, пушит на Docker Hub и деплоит на сервер через SSH. После успешного деплоя приходит уведомление в Telegram.
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+Образы на Docker Hub: `bepwyta/kittygram_backend`, `bepwyta/kittygram_frontend`, `bepwyta/kittygram_gateway`.
+
+## Переменные окружения
+
+Смотри `.env.example` — там все нужные переменные с комментариями.
+
+## Автотесты проекта
+
+```bash
+# Создай venv, поставь зависимости из backend/requirements.txt, затем:
+pytest
+```
