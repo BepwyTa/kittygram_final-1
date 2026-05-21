@@ -32,7 +32,10 @@ services:
     image: ${DOCKERHUB_USERNAME}/kittygram_frontend:latest
     container_name: frontend
     env_file: .env
-    command: cp -r /app/build/. /static/
+    command: >
+      sh -c "cp -r /app/build/static/. /static/
+      && cp /app/build/index.html /app/build/favicon.ico
+      /app/build/manifest.json /app/build/asset-manifest.json /static/"
     volumes:
       - static:/static
     depends_on:
